@@ -1,9 +1,29 @@
 <?php
+/**
+ * Main Compliments component class.
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
+
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+/**
+ * Class BP_Compliments_Component
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
 class BP_Compliments_Component extends BP_Component {
 
+    /**
+     * Initialize BP_Compliments_Component class.
+     *
+     * @global object $bp BuddyPress instance.
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     */
     public function __construct() {
         global $bp;
 
@@ -31,7 +51,10 @@ class BP_Compliments_Component extends BP_Component {
     }
 
     /**
-     * Includes.
+     * Include required files.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
      */
     public function includes( $includes = array() ) {
         require( $this->path . '/bp-compliments-classes.php' );
@@ -40,13 +63,18 @@ class BP_Compliments_Component extends BP_Component {
         require( $this->path . '/bp-compliments-screens.php' );
         require( $this->path . '/bp-compliments-templatetags.php' );
         require( $this->path . '/bp-compliments-actions.php' );
+        require( $this->path . '/bp-compliments-notifications.php' );
+        require( $this->path . '/bp-compliments-activity.php' );
         require( $this->path . '/bp-compliments-forms.php' );
     }
 
     /**
      * Setup globals.
      *
-     * @global object $bp BuddyPress instance
+     * @global object $bp BuddyPress instance.
+     * @param array $args Not being used.
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
      */
     public function setup_globals( $args = array() ) {
         global $bp;
@@ -56,6 +84,7 @@ class BP_Compliments_Component extends BP_Component {
 
         // Set up the $globals array
         $globals = array(
+            'notification_callback' => 'bp_compliments_format_notifications',
             'global_tables'         => array(
                 'table_name' => BP_COMPLIMENTS_TABLE,
             )
@@ -89,6 +118,9 @@ class BP_Compliments_Component extends BP_Component {
 
     /**
      * Setup hooks.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
      */
     public function setup_hooks() {
         // javascript hook
@@ -96,11 +128,18 @@ class BP_Compliments_Component extends BP_Component {
     }
 
     /**
-     * Setup profile / BuddyBar navigation
+     * Setup profile navigation.
+     *
+     * @global object $bp BuddyPress instance.
+     * @param array $main_nav Not being used.
+     * @param array $sub_nav Not being used.
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
      */
     public function setup_nav( $main_nav = array(), $sub_nav = array() ) {
         global $bp;
 
+        do_action( 'bp_compliments_before_setup_nav' );
         // Need to change the user ID, so if we're not on a member page, $counts variable is still calculated
         $user_id = bp_is_user() ? bp_displayed_user_id() : bp_loggedin_user_id();
         $counts  = bp_compliments_total_counts( array( 'user_id' => $user_id ) );
@@ -123,6 +162,9 @@ class BP_Compliments_Component extends BP_Component {
      * Enqueues the javascript.
      *
      * The JS is used to add AJAX functionality when clicking on the compliments button.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
      */
     public function enqueue_scripts() {
         // Do not enqueue if no user is logged in
@@ -142,6 +184,13 @@ class BP_Compliments_Component extends BP_Component {
 
 }
 
+/**
+ * Adds the Compliments component to BuddyPress.
+ *
+ * @global object $bp BuddyPress instance.
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
 function bp_compliments_setup_component() {
     global $bp;
 

@@ -4,7 +4,7 @@ Donate link: http://wpgeodirectory.com/
 Tags: buddypress, buddypress compliments, wordpress yelp compliments, buddypress integration, business directory plugin, directory, directory plugin, geodirectory, geodirectory buddypress, geodirectory buddypress integration, social network, yelp clone, yelp compliments
 Requires at least: 3.1
 Tested up to: 4.2.2
-Stable tag: 0.0.1
+Stable tag: 0.0.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -19,6 +19,9 @@ BuddyPress compliments adds a smart way for BuddyPress members to interact with 
 * A Compliment button and Compliments tab will appear in each member's profile.
 * When you click the Compliments button, a popup will show up with compliment types
 * Submitted compliments will be visible in user's compliments section.
+* A notification is sent to the compliment receiving member.
+* Compliments are tracked in BuddyPress Activity
+* Members can delete compliments received.
 
 We built this plugin especially for Whoop! our upcoming WordPress Directory Theme powered by [GeoDirectory](https://wordpress.org/plugins/geodirectory/ "Whoop! is a GeoDirectory theme and it will be released soon"). 
 
@@ -29,6 +32,8 @@ The plugins has been tested with the following themes before release:
 Twenty Thirteen, Twenty Fourteen, Twenty Fifteen, GeoDIrectory Framework and Whoop! of course.
 
 Should you find any bug, please report it in the support forum and we will fix it asap!
+
+BuddyPress Compliments is 100% translatable.
 
 == Installation ==
 
@@ -62,11 +67,19 @@ No questions so far, but don't hesitate to ask!
 1. The compliments page where you can add compliment types.
 2. A Compliment button and Compliments tab are added to each profile page.
 3. Click the Compliments button and a popup will be displayed with compliment types for submission.
-4. Submitted compliments will be visible in user’s compliments section.
+4. Submitted compliments will be visible in user's compliments section.
 
 == Changelog ==
 
-= 1.0 =
+= 0.0.2 =
+* Support for bp activity component - ADDED
+* Compliments can be deleted by the receiver - ADDED
+* Supports for bp notification component - ADDED
+* Translation support - ADDED
+* Compliment Icon upload form uses latest media uploader - CHANGED
+* Send compliment modal form z-index bug - FIXED
+
+= 0.0.1 =
 * First release.
 
 == Upgrade Notice ==

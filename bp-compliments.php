@@ -1,9 +1,16 @@
 <?php
+/**
+ * This is the main BuddyPress Compliments plugin file, here we declare and call the important stuff
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
+
 /*
 Plugin Name: BuddyPress Compliments
 Plugin URI: http://wpgeodirectory.com/
 Description: Compliments module for BuddyPress.
-Version: 0.0.1
+Version: 0.0.2
 Author: GeoDirectory
 Author URI: http://wpgeodirectory.com
 */
@@ -12,18 +19,25 @@ Author URI: http://wpgeodirectory.com
 if ( !defined( 'ABSPATH' ) ) exit;
 
 /**
+ * BuddyPress compliments text domain.
+ */
+define( 'BP_COMP_TEXTDOMAIN', 'bp-compliments' );
+
+/**
  * Only load the plugin code if BuddyPress is activated.
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
  */
 function bp_compliments_init() {
     global $wpdb, $bp;
     // some pertinent defines
-    define( 'BP_COMPLIMENTS_VER', "0.0.1" );
+    define( 'BP_COMPLIMENTS_VER', "0.0.2" );
     define( 'BP_COMPLIMENTS_DIR', dirname( __FILE__ ) );
     define( 'BP_COMPLIMENTS_URL', plugin_dir_url( __FILE__ ) );
     if ( !$table_prefix = $bp->table_prefix )
         $table_prefix = apply_filters( 'bp_core_get_table_prefix', $wpdb->base_prefix );
     define( 'BP_COMPLIMENTS_TABLE', $table_prefix . 'bp_compliments' );
-    define( 'BP_COMP_TEXTDOMAIN', 'bp-compliments' );
 
     // only supported in BP 1.5+
     if ( version_compare( BP_VERSION, '1.3', '>' ) ) {
@@ -42,6 +56,13 @@ function bp_compliments_init() {
 }
 add_action( 'bp_include', 'bp_compliments_init' );
 
+/**
+ * Creates Custom table for BuddyPress compliments.
+ *
+ * @global object $bp BuddyPress instance.
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
 function bp_compliments_activate() {
     global $bp, $wpdb;
     $version = get_option( 'bp_compliments_version');
@@ -68,4 +89,19 @@ function bp_compliments_activate() {
     }
 }
 register_activation_hook( __FILE__, 'bp_compliments_activate' );
+
+/**
+ * Custom text domain loader.
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
+function bp_compliments_localization() {
+    $locale = apply_filters('plugin_locale', get_locale(), BP_COMP_TEXTDOMAIN);
+
+    load_textdomain(BP_COMP_TEXTDOMAIN, WP_LANG_DIR . '/' . BP_COMP_TEXTDOMAIN . '/' . BP_COMP_TEXTDOMAIN . '-' . $locale . '.mo');
+    load_plugin_textdomain(BP_COMP_TEXTDOMAIN, false, dirname( plugin_basename( __FILE__ ) ) . '/languages');
+
+}
+add_action( 'plugins_loaded', 'bp_compliments_localization' );
 

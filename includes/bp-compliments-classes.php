@@ -1,4 +1,11 @@
 <?php
+/**
+ * Class that interact with the custom db table.
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
+
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) exit;
 
@@ -37,6 +44,9 @@ class BP_Compliments {
     /**
      * Constructor.
      *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
      * @param int $receiver_id The user ID of the user you want to compliment.
      * @param int $sender_id The user ID initiating the compliment request.
      * @param int $term_id The term ID of the compliment type.
@@ -61,6 +71,9 @@ class BP_Compliments {
 
     /**
      * Saves a compliment into the database.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
      */
     public function save() {
         global $wpdb, $bp;
@@ -89,28 +102,49 @@ class BP_Compliments {
 
     /**
      * Deletes a compliment from the database.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
+     * @param $c_id
+     * @return
      */
-    public function delete() {
+    public static function delete($c_id) {
         global $wpdb, $bp;
         $table_name = BP_COMPLIMENTS_TABLE;
-        return $wpdb->query( $wpdb->prepare( "DELETE FROM {$table_name} WHERE id = %d", $this->id ) );
+        return $wpdb->query( $wpdb->prepare( "DELETE FROM {$table_name} WHERE id = %d", $c_id ) );
     }
 
     /**
-     * Get the sender IDs for a given user.
+     * Get the compliments for a given user.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
+     * @global object $bp BuddyPress instance.
      * @param $user_id
      * @param $offset
      * @param $limit
+     * @param bool|int $c_id
      * @return mixed
      */
-    public static function get_compliments( $user_id, $offset, $limit ) {
+    public static function get_compliments( $user_id, $offset, $limit, $c_id = false ) {
         global $bp, $wpdb;
         $table_name = BP_COMPLIMENTS_TABLE;
-        return $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$table_name} WHERE receiver_id = %d ORDER BY created_at DESC LIMIT %d, %d", $user_id, $offset, $limit ) );
+        if ($c_id) {
+            return $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$table_name} WHERE receiver_id = %d AND id = %d ORDER BY created_at DESC LIMIT %d, %d", $user_id, $c_id, $offset, $limit ) );
+        } else {
+            return $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$table_name} WHERE receiver_id = %d ORDER BY created_at DESC LIMIT %d, %d", $user_id, $offset, $limit ) );
+        }
     }
 
     /**
      * Get the senders / receivers counts for a given user.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
+     * @global object $bp BuddyPress instance.
      * @param $user_id
      * @return array
      */
@@ -126,6 +160,11 @@ class BP_Compliments {
 
     /**
      * Deletes all compliments for a given user.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
+     * @global object $bp BuddyPress instance.
      * @param $user_id
      */
     public static function delete_all_for_user( $user_id ) {

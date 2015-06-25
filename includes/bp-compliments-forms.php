@@ -1,4 +1,11 @@
 <?php
+/**
+ * Functions related to compliment forms.
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
+
 function bp_compliments_modal_form($pid = 0, $receiver_id = 0) {
     ?>
     <div class="comp-modal">
@@ -66,6 +73,11 @@ function bp_compliments_modal_form($pid = 0, $receiver_id = 0) {
 <?php
 }
 
+/**
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
 function bp_compliments_modal_ajax()
 {
     check_ajax_referer('bp-compliments-nonce', 'bp_compliments_nonce');
@@ -73,19 +85,23 @@ function bp_compliments_modal_ajax()
     wp_die();
 }
 
-function bp_compliments_modal_shadow(){ ?>
-    <div id="bp_compliments_modal_shadow" style="display: none;"></div>
-<?php }
-add_action('wp_footer', 'bp_compliments_modal_shadow');
-
 //Ajax functions
 add_action('wp_ajax_bp_compliments_modal_ajax', 'bp_compliments_modal_ajax');
 
 //Javascript
-add_action('bp_after_member_home_content', 'bp_compliments_js');
-function bp_compliments_js() {
+add_action('wp_footer', 'bp_compliments_modal_init');
+/**
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
+function bp_compliments_modal_init() {
+    if (!bp_is_user() || !is_user_logged_in()){
+        return;
+    }
     $ajax_nonce = wp_create_nonce("bp-compliments-nonce");
     ?>
+    <div id="bp_compliments_modal_shadow" style="display: none;"></div>
     <div class="comp-modal" style="display: none;">
         <div class="comp-modal-content-wrap">
             <div class="comp-modal-title comp-loading-icon">
