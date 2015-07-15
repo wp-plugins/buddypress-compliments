@@ -4,7 +4,7 @@ Donate link: http://wpgeodirectory.com/
 Tags: buddypress, buddypress compliments, wordpress yelp compliments, buddypress integration, business directory plugin, directory, directory plugin, geodirectory, geodirectory buddypress, geodirectory buddypress integration, social network, yelp clone, yelp compliments
 Requires at least: 3.1
 Tested up to: 4.2.2
-Stable tag: 0.0.2
+Stable tag: 0.0.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -21,11 +21,10 @@ BuddyPress compliments adds a smart way for BuddyPress members to interact with 
 * Submitted compliments will be visible in user's compliments section.
 * A notification is sent to the compliment receiving member.
 * Compliments are tracked in BuddyPress Activity
-* Members can delete compliments received.
+* Members can delete compliments received (option to prevent this available).
+* Compliments are now paginated
 
-We built this plugin especially for Whoop! our upcoming WordPress Directory Theme powered by [GeoDirectory](https://wordpress.org/plugins/geodirectory/ "Whoop! is a GeoDirectory theme and it will be released soon"). 
-
-We decided to release BuddyPress Compliments for free, while we give the final touches to Whoop! so that any BuddyPress users can take advantage of it.
+We built this plugin especially for Whoop! our [WordPress Directory Theme](https://wpgeodirectory.com/themes/wordpress-directory-theme-whoop/ "Whoop! is the latest Social Directory theme for GeoDirectory") powered by [GeoDirectory](https://wordpress.org/plugins/geodirectory/ "Whoop! is a GeoDirectory theme and it will be released soon"). 
 
 The plugins has been tested with the following themes before release:
 
@@ -70,6 +69,14 @@ No questions so far, but don't hesitate to ask!
 4. Submitted compliments will be visible in user's compliments section.
 
 == Changelog ==
+
+= 0.0.3 =
+Docblocks added to all functions, filters and actions - ADDED
+Members can delete compliments received? setting - ADDED
+Number of Compliments to display per page setting - ADDED
+Custom CSS styles setting - ADDED
+Validation added when adding compliment, icon required - FIXED
+Some strings are not translatable - FIXED
 
 = 0.0.2 =
 * Support for bp activity component - ADDED
