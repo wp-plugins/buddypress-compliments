@@ -4,7 +4,7 @@ Donate link: http://wpgeodirectory.com/
 Tags: buddypress, buddypress compliments, wordpress yelp compliments, buddypress integration, business directory plugin, directory, directory plugin, geodirectory, geodirectory buddypress, geodirectory buddypress integration, social network, yelp clone, yelp compliments
 Requires at least: 3.1
 Tested up to: 4.2.2
-Stable tag: 0.0.3
+Stable tag: 0.0.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -23,6 +23,7 @@ BuddyPress compliments adds a smart way for BuddyPress members to interact with 
 * Compliments are tracked in BuddyPress Activity
 * Members can delete compliments received (option to prevent this available).
 * Compliments are now paginated
+* Compliments can be set as private and visible only to the member receiving them.
 
 We built this plugin especially for Whoop! our [WordPress Directory Theme](https://wpgeodirectory.com/themes/wordpress-directory-theme-whoop/ "Whoop! is the latest Social Directory theme for GeoDirectory") powered by [GeoDirectory](https://wordpress.org/plugins/geodirectory/ "Whoop! is a GeoDirectory theme and it will be released soon"). 
 
@@ -69,6 +70,9 @@ No questions so far, but don't hesitate to ask!
 4. Submitted compliments will be visible in user's compliments section.
 
 == Changelog ==
+
+= 0.0.4 =
+Members can see other members compliment page? setting - ADDED
 
 = 0.0.3 =
 Docblocks added to all functions, filters and actions - ADDED
